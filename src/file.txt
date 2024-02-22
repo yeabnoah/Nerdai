@@ -1,0 +1,71 @@
+AIzaSyC4zzQpO5I6z0p5YKv9tWhVDh30HbvuT2E
+
+
+
+
+const handleSubmit = () => {
+    console.log("====== Submitted ======");
+    setIsAsked(true);
+    axios
+      .post(
+        "https://chatgpt-42.p.rapidapi.com/gpt4",
+        {
+          messages: [
+            {
+              role: "user",
+              content: userInput,
+            },
+          ],
+        },
+        {
+          headers: {
+            "content-type": "application/json",
+            "X-RapidAPI-Key":
+              "f3dddb6a54msh31bc174485267d6p1b90cbjsn1a94ec8c242e",
+            "X-RapidAPI-Host": "chatgpt-42.p.rapidapi.com",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+        setResponseData(response.data.result);
+        setPrompts((prevPrompts) => [
+          ...prevPrompts,
+          { you: userInput, NerdAI: response.data.result },
+        ]);
+        console.log("======= Done ======");
+        setCounter(counter + 1);
+      });
+  };
+
+  const gemini = () => {
+    axios
+      .post(
+        "https://meta-llama-2-ai.p.rapidapi.com/",
+        {
+          data: {
+            model: "meta-llama/Llama-2-70b-chat-hf",
+            messages: [
+              {
+                role: "user",
+                content: "How many days in 2 weeks",
+              },
+            ],
+          },
+        },
+        {
+          headers: {
+            "Content-Type": "application/json", // Fix content-type
+            "X-RapidAPI-Key":
+              "f3dddb6a54msh31bc174485267d6p1b90cbjsn1a94ec8c242e",
+            "X-RapidAPI-Host": "meta-llama-2-ai.p.rapidapi.com",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error making request:", error);
+      });
+  };
