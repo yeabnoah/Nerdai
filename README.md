@@ -12,4 +12,4 @@ Nerdai is a chatbot created specifically for the Nerdspace social media app proj
 ## Technologies Used
 
 - Google Gemini API
-- Nerdspace Social Media App [ Built with react-native Expo ]
+- and an interactive ui with React and Data fetching with axios
